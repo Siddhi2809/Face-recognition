@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRAMS</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .wrapper {
+            color: black;
+        }
+
+        .navbar-nav {
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-link {
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color:red;
+        }
+        .btn{
+            margin: 7px;
+            color: white;
+        }
+        h3{
+            color: white;  
+        }
+        body {
+            background-color: #222; 
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #f0ebeb;
+        }
+
+        input[type="radio"] {
+            margin-right: 20px;
+        }
+
+        .zero-raduis{
+            border-radius: 0px !important;
+        }
+
+        a {
+            color: #92badd;
+            display:inline-block;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 500;
+            text-transform: uppercase;
+            display:inline-block;
+            color: #56baed;
+        }
+
+        /* STRUCTURE */
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: column; 
+            justify-content: center;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+        }
+
+        #formContent {
+            -webkit-border-radius: 10px 10px 10px 10px;
+            border-radius: 10px 10px 10px 10px;
+            background: #fff;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            padding: 0px;
+            -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
+            text-align: center;
+            margin: auto;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        #formFooter {
+            padding: 2px ;
+            text-align: right;
+            width: 90%;
+        }
+
+        /* TABS */
+
+        h2.inactive {
+            color: #cccccc;
+        }
+
+        h2.active {
+            color: #0d0d0d;
+            border-bottom: 2px solid #5fbae9;
+        }
+
+        /* FORM TYPOGRAPHY*/
+
+        input[type=button], input[type=submit], input[type=reset]  {
+            background-color: #56baed;
+            border: none;
+            color: white;
+            width: 85%;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 16px;
+            cursor: pointer;
+            -webkit-border-radius: 5px 5px 5px 5px;
+            border-radius: 5px 5px 5px 5px;
+            margin: 5px 20px 40px 20px;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -ms-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+            background-color: #39ace7;
+        }
+
+        input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+            -moz-transform: scale(0.95);
+            -webkit-transform: scale(0.95);
+            -o-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+
+        input[type=text], input[type=email], input[type="file"]{
+            background-color: #f6f6f6;
+            border: none;
+            color: #0d0d0d;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            width: 85%;
+            border: 2px solid #f6f6f6;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -ms-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+            -webkit-border-radius: 5px 5px 5px 5px;
+            border-radius: 5px 5px 5px 5px;
+        }
+
+        input[type=text]:focus, input[type=email]:focus{
+            background-color: #fff;
+            border-bottom: 2px solid #5fbae9;
+        }
+
+        input[type=text]:placeholder, input[type=email]:placeholder {
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="NAV-Details">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <H3><b>Face Recognition Based Attendance Management System</b></H3>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="{{ url_for('admindash') }}" class="btn btn-outline-info">Home</a>
+                    </li>
+                </ul>
+            </div>
+        </nav> 
+    </div>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <div id="formContent">
+
+        <div class="fadeIn first">
+            <h2 class="my-5">Register New User</h2>
+        </div>
+
+        <form action="{{ url_for('register') }}" method="post">
+        
+            <input type="text" id="userid" name="userid" placeholder="User Id" required>
+            <br>
+            <input type="text" id="username" name="username" placeholder="User Name" required>
+            <br>
+            <input type="text" id="password" name="password" placeholder="Password" required>
+            <br>
+            <input type="text" id="cpassword" name="cpassword" placeholder="Confirm Password" required>
+            <br>
+            <input type="submit" value="Create User">
+            <p>{{ error }}</p>
+        </form>
+    </div>
+
+    <div id="formContent">
+
+        <h2 class="my-5">Add Image of New User</h2>
+
+        <form action="{{ url_for('addImage') }}" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" id="file" accept=".jpg, .jpeg, .png" required>
+            <br>
+            <input type="submit" value="Upload">
+        </form>
+    </div>
+
+</div>
+</body>
+</html>

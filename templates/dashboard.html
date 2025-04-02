@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FRAMS</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .wrapper {
+            color: black;
+        }
+
+        .navbar-nav {
+            margin: 0 auto;
+            display: flex;
+            justify-content: center;
+        }
+
+        .nav-link {
+            transition: all 0.3s;
+        }
+
+        .nav-link:hover {
+            color:red;
+        }
+        .btn{
+            margin: 7px;
+            color: white;
+        }
+        h3{
+            color: white;  
+        }
+        body {
+            background-color: #222; 
+            color: #fff;
+        }
+
+        .navbar {
+            background-color: #f0ebeb;
+        }
+
+        input[type="radio"] {
+            margin-right: 20px;
+        }
+
+        .zero-raduis{
+            border-radius: 0px !important;
+        }
+
+        a {
+            color: #92badd;
+            display:inline-block;
+            text-decoration: none;
+            font-weight: 400;
+        }
+
+        h2 {
+            text-align: center;
+            font-size: 24px;
+            font-weight: 500;
+            text-transform: uppercase;
+            display:inline-block;
+            color: #56baed;
+        }
+
+        /* STRUCTURE */
+
+        .wrapper {
+            display: flex;
+            align-items: center;
+            flex-direction: column; 
+            justify-content: center;
+            width: 100%;
+            min-height: 100%;
+            padding: 20px;
+        }
+
+        #formContent {
+            -webkit-border-radius: 10px 10px 10px 10px;
+            border-radius: 10px 10px 10px 10px;
+            background: #fff;
+            padding: 30px;
+            width: 90%;
+            max-width: 450px;
+            position: relative;
+            padding: 0px;
+            -webkit-box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
+            box-shadow: 0 2px 5px 0 rgba(0,0,0,0.3);
+            text-align: center;
+            margin: auto;
+            margin-top: 10px;
+        }
+
+        #formFooter {
+            padding: 2px ;
+            text-align: right;
+            width: 90%;
+        }
+
+        /* TABS */
+
+        h2.inactive {
+            color: #cccccc;
+        }
+
+        h2.active {
+            color: #0d0d0d;
+            border-bottom: 2px solid #5fbae9;
+        }
+
+        /* FORM TYPOGRAPHY*/
+
+        input[type=button], input[type=submit], input[type=reset]  {
+            background-color: #56baed;
+            border: none;
+            color: white;
+            width: 85%;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            text-transform: uppercase;
+            font-size: 16px;
+            cursor: pointer;
+            -webkit-border-radius: 5px 5px 5px 5px;
+            border-radius: 5px 5px 5px 5px;
+            margin: 5px 20px 40px 20px;
+            -webkit-transition: all 0.3s ease-in-out;
+            -moz-transition: all 0.3s ease-in-out;
+            -ms-transition: all 0.3s ease-in-out;
+            -o-transition: all 0.3s ease-in-out;
+            transition: all 0.3s ease-in-out;
+        }
+
+        input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover  {
+            background-color: #39ace7;
+        }
+
+        input[type=button]:active, input[type=submit]:active, input[type=reset]:active  {
+            -moz-transform: scale(0.95);
+            -webkit-transform: scale(0.95);
+            -o-transform: scale(0.95);
+            -ms-transform: scale(0.95);
+            transform: scale(0.95);
+        }
+
+        input[type=text], input[type=email] {
+            background-color: #f6f6f6;
+            border: none;
+            color: #0d0d0d;
+            padding: 10px 25px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 5px;
+            width: 85%;
+            border: 2px solid #f6f6f6;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -ms-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+            -webkit-border-radius: 5px 5px 5px 5px;
+            border-radius: 5px 5px 5px 5px;
+        }
+
+        input[type=text]:focus, input[type=email]:focus{
+            background-color: #fff;
+            border-bottom: 2px solid #5fbae9;
+        }
+
+        input[type=text]:placeholder, input[type=email]:placeholder {
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+    <div class="NAV-Details">
+        <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <H3><b>Face Recognition Based Attendance Management System</b></H3>
+                </ul>
+                <ul class="navbar-nav">
+                    <div>
+                        <p>User ID: {{ user_id }}</p>
+                        <p>Username: {{ user_name }}</p>
+                    </div>
+                </ul>
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a href="{{ url_for('logout') }}" class="btn btn-danger">Logout</a>  
+                    </li>
+                    <li class="nav-item">
+                        <button id="checkInButton" class="btn btn-success">Check In</button>
+                    </li>
+                    <li class="nav-item">
+                        <button id="checkOutButton" class="btn  btn-warning">Check Out</button>
+                    </li>
+                </ul>
+            </div>
+        </nav> 
+    </div>
+
+    <script>
+        document.getElementById("checkInButton").addEventListener("click", function() {
+            var xhr = new XMLHttpRequest();
+            var url = "/check_in?user_id={{ user_id }}&user_name={{ user_name }}";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send();
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    alert(xhr.responseText);
+                }
+            };
+        });
+    </script>
+
+    <script>
+        document.getElementById("checkOutButton").addEventListener("click", function() {
+            var xhr = new XMLHttpRequest();
+            var url = "/check_out?user_id={{ user_id }}&user_name={{ user_name }}";
+            xhr.open("POST", url, true);
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send();
+            xhr.onload = function() {
+                if (xhr.status == 200) {
+                    alert(xhr.responseText);
+                }
+            };
+        });
+    </script>
+
+    <div id="formContent">
+        <form action="{{ url_for('filter_records') }}" method="post">
+            <div class="fadeIn first">
+                <h2 class="my-5">Filter Records Between Dates</h2>
+            </div>
+
+            <div class="form-group row">
+                <label for="start_date" class="col-sm-4 col-form-label" style="color: black;">Start Date:</label>
+                <div class="col-sm-6">
+                    <input type="date" id="start_date" name="start_date" class="form-control" required>
+                </div>
+            </div>
+        
+            <div class="form-group row">
+                <label for="end_date" class="col-sm-4 col-form-label" style="color: black;">End Date:</label>
+                <div class="col-sm-6">
+                    <input type="date" id="end_date" name="end_date" class="form-control" required>
+                </div>
+            </div>
+
+            <input type="hidden" name="user_id" value="{{ user_id }}">
+            <input type="hidden" name="user_name" value="{{ user_name }}">
+        
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+    
+    <div>
+        <h3 style="padding: 10px; text-align: center;">All Attendance Records</h3>
+        <table class="table table-bordered table-striped" style="background-color: white;">
+            <thead class="thead-dark">
+                <tr>
+                    <th>User ID</th>
+                    <th>User Name</th>
+                    <th>Date</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th>Status</th>
+                    <!-- Add more columns if needed based on your record structure -->
+                </tr>
+            </thead>
+            <tbody>
+                {% for record in records %}
+                    <tr>
+                        <td>{{ record[0] }}</td>  <!-- User ID -->
+                        <td>{{ record[1] }}</td>  <!-- User Name -->
+                        <td>{{ record[2] }}</td>  <!-- Date -->
+                        <td>{{ record[3] }}</td>  <!-- Start Time -->
+                        <td>{{ record[4] }}</td>  <!-- End Time -->
+                        <td>{{ record[5] }}</td>  <!-- Status -->
+                        <!-- Add more cells if needed based on your record structure -->
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
